@@ -20,14 +20,14 @@ module "fluxcd" {
   github_app_pem             = var.github_app_pem
 }
 
-module "ingress" {
-  source = "./modules/nginx-ingress"
+# module "ingress" {
+#  source = "./modules/nginx-ingress"
+#
+#  compartment_id = var.compartment_id
+# }
 
-  compartment_id = var.compartment_id
-}
-
-module "grafana" {
-  source = "./modules/grafana"
-
-  compartment_id = var.compartment_id
-}
+# module "grafana" {
+#   source = "./modules/grafana"
+# 
+#   compartment_id = var.compartment_id
+# }
