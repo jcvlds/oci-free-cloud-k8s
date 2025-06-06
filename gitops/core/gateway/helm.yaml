@@ -4,7 +4,8 @@ metadata:
   name: envoy-gateway-system
 spec:
   interval: 5m
-  url: oci://docker.io/envoyproxy/
+  type: oci
+  url: oci://docker.io/envoyproxy/gateway-helm
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -21,4 +22,4 @@ spec:
         kind: HelmRepository
         name: envoy-gateway-system # envoy-gateway
       interval: 5m
-  releaseName: envoy-gateway-system # envoy-gateway
+  # releaseName: envoy-gateway-system # envoy-gateway
