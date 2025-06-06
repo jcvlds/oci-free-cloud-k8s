@@ -56,6 +56,7 @@ spec:
           region: 'us-ashburn-1'
           access_key_id: ${AWS_ACCESS_KEY_ID}
           secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+          s3ForcePathStyle: true
 
       schemaConfig:
       # schema_config:
@@ -91,6 +92,7 @@ spec:
               region: 'us-ashburn-1'
               access_key_id: ${AWS_ACCESS_KEY_ID}
               secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+              s3ForcePathStyle: true
             # accessKeyIdSecret:
             #   name: aws-credentials
             #   key: access-key-id
