@@ -33,17 +33,45 @@ metadata:
   name: envoy
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
+  parametersRef:
+    group: gateway.envoyproxy.io
+    kind: EnvoyProxy
+    name: envoy-proxy
+    namespace: envoy-gateway-system
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
-  name: envoy-http
+  name: envoy-https
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-cloudflare"
+    cert-manager.io/issue-temporary-certificate: "true"
 spec:
   gatewayClassName: envoy
   listeners:
-    - name: http
-      protocol: HTTP
-      port: 80
+    - name: https
+      protocol: HTTPS
+      port: 443
+      allowedRoutes:
+        namespaces:
+          from: All
+      tls:
+        # mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: juancarlosvaldes.com
+            # namespace: default
+---
+apiVersion: gateway.envoyproxy.io/v1alpha1
+kind: SecurityPolicy
+metadata:
+  name: envoy-gateway-https-cors
+  namespace: default
+spec:
+  targetRefs:
+    - group: gateway.networking.k8s.io
+      kind: Gateway
+      name: envoy-https
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
@@ -51,7 +79,7 @@ metadata:
   name: nginx-test
 spec:
   parentRefs:
-    - name: envoy-http
+    - name: envoy-https
   hostnames:
     - "nginx.juancarlosvaldes.com"
   rules:
@@ -63,3 +91,4 @@ spec:
         - kind: Service
           name: nginx-test
           port: 80
+          weight: 1

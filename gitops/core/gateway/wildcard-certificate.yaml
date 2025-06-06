@@ -10,5 +10,9 @@ spec:
     kind: ClusterIssuer
   commonName: '*.juancarlosvaldes.com'
   dnsNames:
-  - '*.juancarlosvaldes.com'
-  - 'juancarlosvaldes.com'
+    - '*.juancarlosvaldes.com'
+    - 'juancarlosvaldes.com'
+  privateKey:
+    rotationPolicy: Always
+    algorithm: RSA
+    size: 2048
