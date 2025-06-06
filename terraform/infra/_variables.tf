@@ -1,13 +1,14 @@
 variable "compartment_id" {
   type        = string
   description = "The compartment to create the resources in"
+  default = "ocid1.tenancy.oc1..aaaaaaaarxy6mfjfqi6q7kpmhpqezvzncilac3qtpwlpyd2iz7tegzjuje3a"
 }
 
 variable "region" {
   description = "OCI region"
   type        = string
 
-  default = "eu-frankfurt-1"
+  default = "us-ashburn-1"
 }
 
 variable "ssh_public_key" {
@@ -30,4 +31,5 @@ variable "kubernetes_worker_nodes" {
   type        = number
 
   default = 2
+  # default = 4
 }
