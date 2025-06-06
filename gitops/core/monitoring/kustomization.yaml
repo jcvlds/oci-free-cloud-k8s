@@ -7,4 +7,5 @@ resources:
   - promtail.yaml
   - prometheus.yaml
   - thanos.yaml
-  # - grafana.yaml
+  - grafana.yaml
+  # - httproute.yaml
