@@ -49,7 +49,6 @@ spec:
         bucketNames:
           chunks: 'loki-chunks'
           ruler: 'loki-ruler'
-          # Consider removing 'admin' if using OSS Loki
           admin: 'loki-admin'
         s3:
           endpoint: https://idpl1k067soy.compat.objectstorage.us-ashburn-1.oraclecloud.com
@@ -82,6 +81,15 @@ spec:
         enabled: true
         size: 10Gi
         # storageClassName: "gp2"
+
+      backend:
+        replicas: 2
+
+      read:
+        replicas: 2
+
+      write:
+        replicas: 2
 
       loki:
         ruler:
