@@ -2,7 +2,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: envoy-gateway
-  namespace: flux-system
+  namespace: envoy-gateway-system
 spec:
   interval: 5m
   type: oci
@@ -24,5 +24,5 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: envoy-gateway
-        namespace: flux-system
+        namespace: envoy-gateway-system
       interval: 5m
