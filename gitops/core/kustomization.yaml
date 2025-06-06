@@ -4,11 +4,11 @@ namespace: flux-system
 resources:
   - external-secrets/flux.yaml
   - metrics-server/flux.yaml
-  - fluxcd-addons/flux.yaml
   - weave/flux.yaml
 
 
 
+  # - fluxcd-addons/flux.yaml
   # - external-dns/flux.yaml
   # - cert-manager/flux.yaml
   # - cert-manager/issuer/flux.y/aml
