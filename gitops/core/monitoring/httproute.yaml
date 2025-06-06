@@ -6,6 +6,7 @@ metadata:
 spec:
   parentRefs:
     - name: envoy-https
+      namespace: envoy-gateway-system
   hostnames:
     - "oci-mon.juancarlosvaldes.com"
   rules:
