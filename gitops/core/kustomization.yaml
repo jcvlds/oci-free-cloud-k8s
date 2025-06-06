@@ -5,8 +5,8 @@ resources:
   - external-secrets/flux.yaml
   - metrics-server/flux.yaml
   - weave/flux.yaml
+  - cert-manager/flux.yaml
   - gateway/flux.yaml
-
 
   # - fluxcd-addons/flux.yaml
   # - external-dns/flux.yaml
