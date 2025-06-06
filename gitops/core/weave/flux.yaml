@@ -1,14 +1,13 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: dex
+  name: weave
   namespace: flux-system
 spec:
   interval: 1h
-  path: ./gitops/core/dex
+  path: ./gitops/core/weave
   prune: true
-  dependsOn:
-    - name: external-secrets
   sourceRef:
     kind: GitRepository
     name: flux-system
+
