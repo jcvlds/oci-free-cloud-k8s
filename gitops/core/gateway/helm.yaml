@@ -19,7 +19,7 @@ spec:
   timeout: 5m
   chart:
     spec:
-      chart: gateway-helm # envoy-gateway
+      chart: gateway-helm
       version: "1.4.1"
       sourceRef:
         kind: HelmRepository

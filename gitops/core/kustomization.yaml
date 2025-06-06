@@ -7,6 +7,7 @@ resources:
   - weave/flux.yaml
   - cert-manager/flux.yaml
   - gateway/flux.yaml
+  - monitoring/flux.yaml
 
   # - fluxcd-addons/flux.yaml
   # - external-dns/flux.yaml
