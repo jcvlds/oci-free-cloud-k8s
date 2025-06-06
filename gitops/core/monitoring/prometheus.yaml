@@ -1,0 +1,87 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  interval: 10m0s
+  url: https://prometheus-community.github.io/helm-charts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+spec:
+  interval: 10m0s
+  releaseName: prometheus
+  chart:
+    spec:
+      chart: kube-prometheus-stack
+      version: 72.6.4
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus
+        namespace: monitoring
+  install:
+    createNamespace: true
+  values:
+    # prometheus-values.yaml
+    prometheus:
+      prometheusSpec:
+        externalLabels:
+            cluster: "oci-k8s"
+            replica: "prometheus-0"
+        retention: 30d
+        # retention: 24h # change after testing
+        storageSpec:
+          volumeClaimTemplate:
+            spec:
+              accessModes: ["ReadWriteOnce"]
+              resources:
+                requests:
+                  storage: 10Gi
+                  # storage: 5Gi # change after testing
+        thanos:
+          create: true
+          objectStorageConfig:
+            existingSecret:
+              name: thanos-objstore-secret
+              key: objstore.yml
+          blockSize: 2h # send blocks to s3 every 2 hours
+
+    thanosRuler:
+      enabled: false
+
+    grafana:
+      enabled: false  # We'll install separately
+
+    alertmanager:
+      enabled: true
+
+    nodeExporter:
+      enabled: true
+
+    kubeStateMetrics:
+      enabled: true
+
+    prometheusOperator:
+      enabled: true
+
+    # Add the global Thanos Query here (top-level)
+    thanos:
+      query:
+        enabled: true                          # turn on the Querier Deployment 
+        replicaCount: 1
+        service:
+          type: ClusterIP
+          port: 9090                          # Query’s HTTP port
+          targetPort: http
+        dnsDiscovery:
+          enabled: true                       # auto-discover your sidecars by DNS
+          sidecarsService: prometheus-operated
+          sidecarsNamespace: monitoring
+        ingress:
+          enabled: false
+        resources: {}
+
