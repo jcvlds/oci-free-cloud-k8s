@@ -57,9 +57,9 @@ spec:
     - "nginx.juancarlosvaldes.com"
   rules:
     - backendRefs:
-        - group: "gateway.envoyproxy.io"
           kind: Service
           name: nginx-test
+          port: 80
       matches:
         - path:
             type: PathPrefix
