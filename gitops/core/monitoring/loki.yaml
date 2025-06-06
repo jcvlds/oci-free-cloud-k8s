@@ -82,15 +82,6 @@ spec:
         size: 10Gi
         # storageClassName: "gp2"
 
-      backend:
-        replicas: 2
-
-      read:
-        replicas: 2
-
-      write:
-        replicas: 2
-
       loki:
         ruler:
           storage:
@@ -101,12 +92,15 @@ spec:
               access_key_id: ${AWS_ACCESS_KEY_ID}
               secret_access_key: ${AWS_SECRET_ACCESS_KEY}
               s3ForcePathStyle: true
-            # accessKeyIdSecret:
-            #   name: aws-credentials
-            #   key: access-key-id
-            # secretAccessKeySecret:
-            #   name: aws-credentials
-            #   key: secret-access-key
+
+    backend:
+      replicas: 2
+
+    read:
+      replicas: 2
+
+    write:
+      replicas: 2
 
     chunksCache:
       enabled: false
