@@ -56,9 +56,9 @@ spec:
     - "nginx.juancarlosvaldes.com"
   rules:
     - backendRefs:
-        - kind: Service
-        - name: nginx-test
-        - port: 80
+        kind: Service
+        name: nginx-test
+        port: 80
       matches:
         - path:
             type: PathPrefix
