@@ -6,5 +6,5 @@ resources:
   - loki.yaml
   - promtail.yaml
   - prometheus.yaml
-  # - thanos.yaml
+  - thanos.yaml
   # - grafana.yaml

@@ -1,0 +1,106 @@
+
+
+
+    persistence:
+      enabled: true
+      size: 5Gi
+
+    adminPassword: j7u8a9n4!
+
+    initChownData:
+      enabled: false
+      image:
+        registry: docker.io
+        repository: library/busybox
+        tag: "1.31.1"
+        sha: ""
+        pullPolicy: IfNotPresent
+      securityContext:
+        readOnlyRootFilesystem: false
+        runAsNonRoot: false
+        runAsUser: 0
+        seccompProfile:
+          type: RuntimeDefault
+        capabilities:
+          add:
+            - CHOWN
+          drop:
+            - ALL
+
+    securityContext:
+      fsGroup: 472
+      runAsUser: 472 # Optional but good practice, ensure Grafana runs as this user
+      runAsGroup: 472 # Optional, fsGroup often suffices for write access
+      runAsNonRoot: true
+
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Prometheus
+            type: prometheus
+            url: http://prometheus-kube-prometheus-prometheus:9090
+            access: proxy
+            isDefault: true
+          - name: Loki
+            type: loki
+            url: http://loki-gateway.monitoring.svc.cluster.local:80
+            access: proxy
+            isDefault: false
+          - name: Thanos
+            type: prometheus
+            access: proxy
+            url: http://thanos-query.monitoring.svc.cluster.local:9090
+            isDefault: false
+            prometheusType: Thanos
+            jsonData:
+              timeInterval: "5s"
+              customQueryParameters: "max_source_resolution=auto"  # optional downsampling hint 
+
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: 'default'
+            orgId: 1
+            folder: ''
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/default
+
+    dashboards:
+      default:
+        kubernetes-cluster:
+          gnetId: 7249
+          revision: 1
+          datasource: Prometheus
+        kubernetes-pods:
+          gnetId: 6417
+          revision: 1
+          datasource: Prometheus
+        # loki-logs:
+        #   gnetId: 13639
+        #   revision: 1
+        #   datasource: Loki
+        # loki-dashboard:
+        #   gnetId: 13186
+        #   revision: 1
+        #   datasource: Loki
+        # node-exporter:
+        #   gnetId: 8732
+        #   revision: 1
+        #   datasource: Prometheus
+
+    service:
+      type: NodePort
+      nodePort: 30080
+
+    resources:
+      limits:
+        cpu: 500m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
