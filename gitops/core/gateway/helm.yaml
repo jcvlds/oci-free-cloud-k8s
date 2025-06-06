@@ -33,11 +33,25 @@ metadata:
   name: envoy
 spec:
   controllerName: gateway.envoyproxy.io/gatewayclass-controller
-  parametersRef:
-    group: gateway.envoyproxy.io
-    kind: EnvoyProxy
-    name: envoy-proxy
-    namespace: envoy-gateway-system
+  # parametersRef:
+  #   group: gateway.envoyproxy.io
+  #   kind: EnvoyProxy
+  #   name: envoy-proxy
+  #   namespace: envoy-gateway-system
+# ---
+# apiVersion: gateway.envoyproxy.io/v1alpha1
+# kind: EnvoyProxy
+# metadata:
+#   name: envoy-proxy
+#   namespace: envoy-gateway-system
+# spec:
+#   provider:
+#     kubernetes:
+#       envoyService:
+#         annotations:
+#           # // oracle cloud annotations
+#           service.beta.kubernetes.io/oci-load-balancer-pip-name: "PublicIP"
+#           service.beta.kubernetes.io/oci-load-balancer-resource-group: "default"
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
