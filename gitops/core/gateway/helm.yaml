@@ -1,7 +1,7 @@
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: envoy-gateway-system
+  name: flux-system
 spec:
   interval: 5m
   type: oci
@@ -10,16 +10,18 @@ spec:
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: envoy-gateway-system
+  name: envoy-gateway
+  namespace: flux-system
 spec:
   interval: 10m
+  releaseName: envoy-gateway
   timeout: 5m
   chart:
     spec:
       chart: gateway-helm # envoy-gateway
-      version: "3.12.2"
+      version: "1.4.1"
       sourceRef:
         kind: HelmRepository
         name: envoy-gateway-system # envoy-gateway
+        namespace: flux-system
       interval: 5m
-  # releaseName: envoy-gateway-system # envoy-gateway
