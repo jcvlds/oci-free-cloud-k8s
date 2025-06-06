@@ -4,5 +4,5 @@ namespace: envoy-gateway-system
 resources:
   - namespace.yaml
   - helm.yaml
-  # - clusterissuer.yaml
-  # - wildcard-certificate.yaml
+  - clusterissuer.yaml
+  - wildcard-certificate.yaml
