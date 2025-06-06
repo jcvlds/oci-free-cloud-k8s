@@ -79,7 +79,9 @@ resource "oci_containerengine_node_pool" "k8s_node_pool" {
 
   node_shape_config {
     memory_in_gbs = 12
+    # memory_in_gbs = 6
     ocpus         = 2
+    # ocpus         = 1
   }
   node_source_details {
     image_id    = jsondecode(data.jq_query.latest_image.result)
