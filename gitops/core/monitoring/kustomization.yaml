@@ -8,4 +8,4 @@ resources:
   - prometheus.yaml
   - thanos.yaml
   - grafana.yaml
-  # - httproute.yaml
+  - httproute.yaml
