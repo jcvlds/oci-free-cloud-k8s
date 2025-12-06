@@ -16,7 +16,7 @@ apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: devex-platform-charts
-  namespace: flux-system
+  namespace: widgets
 spec:
   type: oci
   url: oci://ghcr.io/jcvlds/charts
@@ -37,7 +37,7 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: devex-platform-charts
-        namespace: flux-system
+        namespace: widgets
   values:
     gateway:
       enabled: true
