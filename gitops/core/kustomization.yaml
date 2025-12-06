@@ -8,6 +8,7 @@ resources:
   - cert-manager/flux.yaml
   - gateway/flux.yaml
   # - monitoring/flux.yaml
+  - widgetapi/flux.yaml
 
   # - fluxcd-addons/flux.yaml
   # - external-dns/flux.yaml
