@@ -66,6 +66,6 @@ spec:
             value: /
       backendRefs:
         - kind: Service
-          name: flappy-app
+          name: flappy
           port: 80
           weight: 1
