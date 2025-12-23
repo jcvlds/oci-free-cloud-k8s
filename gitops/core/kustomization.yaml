@@ -9,6 +9,7 @@ resources:
   - gateway/flux.yaml
   # - monitoring/flux.yaml
   - widgetapi/flux.yaml
+  - apps/flux.yaml
 
   # - fluxcd-addons/flux.yaml
   # - external-dns/flux.yaml
